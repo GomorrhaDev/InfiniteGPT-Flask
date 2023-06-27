@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}Gomorrha Text Writer{% endblock %}
+
+{% block content %}
+
+<form id="questionForm">
+    <br>
+    <br>
+    <div class="form-group">
+        <input
+            type="text"
+            class="form-control"
+            id="question"
+            name="question"
+            placeholder="Ask your question"
+        />
+    </div>
+    <button type="submit" id="sendBtn" class="btn btn-primary">Send</button>
+</form>
+<div id="loading" style="display: none;">Loading...</div>
+<br>
+<h2>Your Answer:</h2>
+<br>
+<p id="answer"></p>
+<div id="table-container"></div>
+
+<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+<script>
+    $(document).ready(function() {
+        const questionForm = document.getElementById('questionForm');
+        const questionInput = document.getElementById('question');
+        const answerField = document.getElementById('answer');
+        const loadingElement = document.getElementById('loading');
+    
+        questionForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const question = questionInput.value;
+            questionInput.value = '';
+    
+            loadingElement.style.display = 'block';
+            answerField.textContent = '';
+    
+            $.post('/gtw', {question: question}, function() {
+                $.get('/getmsg', function(data) {
+                    loadingElement.style.display = 'none';
+                    answerField.textContent = data;
+                });
+            });
+        });
+    });
+    
+</script>
+{% endblock %}

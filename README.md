@@ -1,3 +1,6 @@
 # InfiniteGPT-Flask
+#    GPT without content restrictions    
 
-Only a small project, everyone is free to use the code for their own purposes. Make something out of it (:
+It's just a small project which I don't develop anymore everyone can use the code for his own purposes. Make something out of it (:
+
+Just add the API key in the gtw.py file and add a secret key in the __innit__.py file and it is usable.
